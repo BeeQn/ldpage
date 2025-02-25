@@ -180,13 +180,12 @@ const BenefitsSection = () => {
     </Box>
   );
 };
-
-// Seção Hero com Countdown Persistente
+// Seção Hero com Countdown Persistente de 4 Horas
 const HeroSection = () => {
-  // Função para obter o tempo restante do localStorage ou iniciar com 15 minutos
+  // Função para obter o tempo restante do localStorage ou iniciar com 4 horas
   const getInitialTime = () => {
     const savedTime = localStorage.getItem('countdownTime');
-    return savedTime ? parseInt(savedTime) : 15 * 60; // 15 minutos em segundos
+    return savedTime ? parseInt(savedTime) : 4 * 60 * 60; // 4 horas em segundos
   };
 
   const [timeLeft, setTimeLeft] = useState(getInitialTime());
@@ -202,10 +201,12 @@ const HeroSection = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // Função para formatar o tempo no formato HH:MM:SS
   const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
+    const hours = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   return (
@@ -270,7 +271,7 @@ const HeroSection = () => {
                 boxShadow: '0 0 30px rgba(243, 186, 47, 0.5)',
                 width: '100%',
                 maxWidth: '400px',
-                height:'130px',
+                height: '130px',
                 display: 'block',
                 mx: 'auto'
               }}
