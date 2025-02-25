@@ -1,3 +1,15 @@
+# Etapa 1: Build da aplicação React
+FROM node:14-alpine AS build
+WORKDIR /app
+
+# Copia os arquivos de dependências e instala
+COPY package*.json ./
+RUN npm install
+
+# Copia o restante dos arquivos do projeto e gera a build
+COPY . .
+RUN npm run build
+
 # Etapa 2: Servir a aplicação com Nginx
 FROM nginx:stable-alpine
 
