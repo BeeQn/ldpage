@@ -427,7 +427,7 @@ function SocialProofSection() {
           <Box
             sx={{
               display: 'flex',
-              transition: 'transform 0.5s ease',
+              transition: 'transform 2.8s ease',
               transform: `translateX(-${currentSlide * 100}%)`,
             }}
           >
@@ -610,7 +610,7 @@ function FAQSection() {
       >
           <Container>
               <Typography 
-                  variant="h2" 
+                  variant="h5" 
                   component="h2" 
                   gutterBottom 
                   sx={{ 
