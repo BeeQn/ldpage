@@ -393,7 +393,6 @@ function SocialProofSection() {
           ))}
         </Grid>
 
-
         {/* Carrossel de Imagens de Prova Social */}
         <Box sx={{ 
           maxWidth: '800px', 
@@ -445,8 +444,7 @@ function SocialProofSection() {
       </Container>
     </Box>
   );
-}
-function CTABanner() {
+}function CTABanner() {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 100
