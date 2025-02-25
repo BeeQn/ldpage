@@ -17,8 +17,8 @@ FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html
 
 # Copia os arquivos de certificado SSL
-COPY ssl/certificado.crt /etc/nginx/ssl/certificado.crt
-COPY ssl/chave-privada.key /etc/nginx/ssl/chave-privada.key
+COPY nginx/ssl/certificado.crt /etc/nginx/ssl/certificado.crt
+COPY nginx/ssl/chave-privada.key /etc/nginx/ssl/chave-privada.key
 
 # Copia o arquivo de configuração do Nginx
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
