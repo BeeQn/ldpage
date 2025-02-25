@@ -679,6 +679,7 @@ const HeroSection = () => {
           }}
         >
           <HeroSection />
+          <BenefitsSection/>
           <SocialProofSection />
           <CTABanner />
           <FAQSection />
