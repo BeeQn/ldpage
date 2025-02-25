@@ -319,34 +319,44 @@ const HeroSection = () => {
   );
 };
 function SocialProofSection() {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    autoplay: true,
-    autoplaySpeed: 3000,
-  };
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const images = [
+    '/images/prova-social/social1.png',
+    '/images/prova-social/social2.png',
+    '/images/prova-social/social3.png',
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % images.length);
+    }, 3000); // Muda de slide a cada 3 segundos
+
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   return (
-    <Box sx={{ 
-      py: { xs: 6, md: 10 },
-      background: `linear-gradient(180deg, ${COINZA_BLACK} 0%, #121212 100%)`,
-      borderTop: `3px solid ${COINZA_YELLOW}`,
-      borderBottom: `3px solid ${COINZA_YELLOW}`
-    }}>
+    <Box
+      sx={{
+        py: { xs: 6, md: 10 },
+        background: `linear-gradient(180deg, ${COINZA_BLACK} 0%, #121212 100%)`,
+        borderTop: `3px solid ${COINZA_YELLOW}`,
+        borderBottom: `3px solid ${COINZA_YELLOW}`,
+      }}
+    >
       <Container>
-        <Typography variant="h3" sx={{
-          textAlign: 'center',
-          color: COINZA_YELLOW,
-          mb: 6,
-          fontWeight: '900',
-          textTransform: 'uppercase',
-          letterSpacing: 2,
-          fontSize: { xs: '1.8rem', md: '2.5rem' }
-        }}>
+        <Typography
+          variant="h3"
+          sx={{
+            textAlign: 'center',
+            color: COINZA_YELLOW,
+            mb: 6,
+            fontWeight: '900',
+            textTransform: 'uppercase',
+            letterSpacing: 2,
+            fontSize: { xs: '1.8rem', md: '2.5rem' },
+          }}
+        >
           QUEM USOU LUCROU 🔥
         </Typography>
 
@@ -358,33 +368,41 @@ function SocialProofSection() {
             "Nunca imaginei que poderia lucrar tanto em tão pouco tempo. O material é incrível! – Ana, investidora 🚀",
             "As análises preditivas mudaram completamente minha forma de investir. Recomendo demais! – Carlos, analista 💼",
             "A comunidade VIP fez toda a diferença. Networking de alto nível e insights valiosos! – Juliana, empresária 🌟",
-            "Os sinais diários são precisos e me ajudaram a tomar decisões mais assertivas. – Pedro, day trader 📈"
+            "Os sinais diários são precisos e me ajudaram a tomar decisões mais assertivas. – Pedro, day trader 📈",
           ].map((text, index) => (
             <Grid item xs={12} md={6} key={index}>
-              <Box sx={{ 
-                p: 3,
-                height: '100%',
-                background: 'linear-gradient(145deg, #1a1a1a, #222222)',
-                borderRadius: 3,
-                border: `2px solid ${COINZA_YELLOW}`,
-                boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-                transition: 'transform 0.3s',
-                '&:hover': {
-                  transform: 'translateY(-5px)'
-                }
-              }}>
-                <Typography variant="body1" sx={{ 
-                  color: TEXT_GRAY,
-                  fontSize: { xs: '1rem', md: '1.1rem' },
-                  lineHeight: 1.6
-                }}>
+              <Box
+                sx={{
+                  p: 3,
+                  height: '100%',
+                  background: 'linear-gradient(145deg, #1a1a1a, #222222)',
+                  borderRadius: 3,
+                  border: `2px solid ${COINZA_YELLOW}`,
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+                  transition: 'transform 0.3s',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                  },
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: TEXT_GRAY,
+                    fontSize: { xs: '1rem', md: '1.1rem' },
+                    lineHeight: 1.6,
+                  }}
+                >
                   {text.split('–')[0]}
-                  <Box component="span" sx={{ 
-                    color: COINZA_YELLOW, 
-                    fontWeight: 'bold',
-                    display: 'block',
-                    mt: 1
-                  }}>
+                  <Box
+                    component="span"
+                    sx={{
+                      color: COINZA_YELLOW,
+                      fontWeight: 'bold',
+                      display: 'block',
+                      mt: 1,
+                    }}
+                  >
                     – {text.split('–')[1]}
                   </Box>
                 </Typography>
@@ -394,49 +412,89 @@ function SocialProofSection() {
         </Grid>
 
         {/* Carrossel de Imagens de Prova Social */}
-        <Box sx={{ 
-          maxWidth: '800px', 
-          mx: 'auto',
-          mb: { xs: 6, md: 8 }
-        }}>
-          <Slider {...settings}>
-            {[1, 2, 3].map((num) => (
-              <div key={num}>
-                <Box 
-                  component="img" 
-                  src={`/images/prova-social/social${num}.png`} 
-                  alt={`Prova Social WhatsApp ${num}`} 
-                  sx={{ 
-                    width: '100%', 
-                    height: 'auto', 
-                    borderRadius: 3, 
-                    border: `2px solid ${COINZA_YELLOW}`,
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
-                  }}
-                />
-              </div>
+        <Box
+          sx={{
+            maxWidth: '800px',
+            mx: 'auto',
+            mb: { xs: 6, md: 8 },
+            position: 'relative',
+            overflow: 'hidden',
+            borderRadius: 3,
+            border: `2px solid ${COINZA_YELLOW}`,
+            boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              transition: 'transform 0.5s ease',
+              transform: `translateX(-${currentSlide * 100}%)`,
+            }}
+          >
+            {images.map((src, index) => (
+              <Box
+                key={index}
+                component="img"
+                src={src}
+                alt={`Prova Social WhatsApp ${index + 1}`}
+                sx={{
+                  width: '100%',
+                  height: 'auto',
+                  flexShrink: 0,
+                }}
+              />
             ))}
-          </Slider>
+          </Box>
+
+          {/* Indicadores de Slide */}
+          <Box
+            sx={{
+              position: 'absolute',
+              bottom: 10,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              display: 'flex',
+              gap: 1,
+            }}
+          >
+            {images.map((_, index) => (
+              <Box
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                sx={{
+                  width: 10,
+                  height: 10,
+                  borderRadius: '50%',
+                  bgcolor: index === currentSlide ? COINZA_YELLOW : '#fff',
+                  cursor: 'pointer',
+                  opacity: index === currentSlide ? 1 : 0.5,
+                  transition: 'opacity 0.3s ease',
+                }}
+              />
+            ))}
+          </Box>
         </Box>
 
         {/* CTA Final */}
         <Box sx={{ textAlign: 'center', mt: 6 }}>
-          <Typography variant="h5" sx={{ 
-            color: '#fff', 
-            mb: 3,
-            fontWeight: 'bold',
-            fontSize: { xs: '1.2rem', md: '1.5rem' }
-          }}>
+          <Typography
+            variant="h5"
+            sx={{
+              color: '#fff',
+              mb: 3,
+              fontWeight: 'bold',
+              fontSize: { xs: '1.2rem', md: '1.5rem' },
+            }}
+          >
             🚨 ATENÇÃO: Esses resultados não são típicos. Seu desempenho pode variar.
           </Typography>
-          <PrimaryButton 
-            sx={{ 
+          <PrimaryButton
+            sx={{
               fontSize: { xs: '1rem', md: '1.2rem' },
               px: { xs: 4, md: 6 },
               py: { xs: 1.5, md: 2 },
-              boxShadow: '0 0 30px rgba(243, 186, 47, 0.5)'
+              boxShadow: '0 0 30px rgba(243, 186, 47, 0.5)',
             }}
-            endIcon={<FlashOn sx={{ fontSize: { xs: 24, md: 30 } }} />}
           >
             QUERO TER ESSES RESULTADOS
           </PrimaryButton>
@@ -444,7 +502,10 @@ function SocialProofSection() {
       </Container>
     </Box>
   );
-}function CTABanner() {
+}
+
+
+function CTABanner() {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 100
