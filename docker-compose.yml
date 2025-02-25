@@ -5,5 +5,5 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:80"   # Mapeia a porta 80 do container para a porta 3000 da sua máquina
+      - "80:3000"   # Mapeia a porta 80 do container para a porta 3000 da sua máquina
     restart: always
